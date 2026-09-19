@@ -1116,6 +1116,45 @@ body{
         padding:20px 18px 23px;
     }
 }
+
+/* =========================================================
+   MANUAL MESSAGE CONTINUE BUTTONS
+========================================================= */
+
+.continue-btn{
+    margin:14px auto 0;
+    display:block;
+    padding:10px 18px;
+    font-size:12px;
+    min-height:40px;
+    animation:continuePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes continuePulse{
+    0%,100%{
+        transform:translateY(0);
+        box-shadow:0 0 14px rgba(255,65,170,.14);
+    }
+    50%{
+        transform:translateY(-2px);
+        box-shadow:0 0 24px rgba(255,65,170,.28);
+    }
+}
+
+.message-cursor{
+    display:inline-block;
+    width:2px;
+    height:1em;
+    background:#ff9bd0;
+    vertical-align:-.12em;
+    margin-left:3px;
+    animation:cursorBlink .75s steps(1) infinite;
+}
+
+@keyframes cursorBlink{
+    50%{opacity:0;}
+}
+
 </style>
 </head>
 
@@ -1542,6 +1581,7 @@ body{
 </div>
 
 
+
 <script>
 
 /* =========================================================
@@ -1575,15 +1615,18 @@ function burstHearts(count=18){
         h.className="burst-heart";
         h.innerHTML=Math.random()>.25 ? "❤️" : "💗";
 
-        h.style.setProperty("--bx",
+        h.style.setProperty(
+            "--bx",
             ((Math.random()-.5)*330)+"px"
         );
 
-        h.style.setProperty("--by",
+        h.style.setProperty(
+            "--by",
             ((Math.random()-.5)*500)+"px"
         );
 
-        h.style.setProperty("--rot",
+        h.style.setProperty(
+            "--rot",
             ((Math.random()-.5)*80)+"deg"
         );
 
@@ -1638,7 +1681,77 @@ for(let i=0;i<7;i++){
 
 
 /* =========================================================
-   SCENE 1 TYPEWRITER
+   SHARED TYPEWRITER
+   Message types slowly, then STAYS until user taps.
+========================================================= */
+
+function typeText(element, text, speed=40, onComplete=null){
+
+    element.innerHTML="";
+
+    const textNode=document.createTextNode("");
+    element.appendChild(textNode);
+
+    const cursor=document.createElement("span");
+    cursor.className="message-cursor";
+    element.appendChild(cursor);
+
+    const chars=[...text];
+    let index=0;
+
+    const interval=setInterval(()=>{
+
+        textNode.textContent += chars[index];
+        index++;
+
+        if(index>=chars.length){
+
+            clearInterval(interval);
+
+            setTimeout(()=>{
+
+                if(cursor && cursor.parentNode){
+                    cursor.remove();
+                }
+
+                if(typeof onComplete==="function"){
+                    onComplete();
+                }
+
+            },120);
+
+        }
+
+    },speed);
+}
+
+
+/* =========================================================
+   SHARED "TAP TO CONTINUE"
+========================================================= */
+
+function addContinueButton(container, label, onClick){
+
+    const old=container.querySelector(".continue-btn");
+
+    if(old) old.remove();
+
+    const button=document.createElement("button");
+
+    button.className="btn continue-btn";
+    button.type="button";
+    button.textContent=label;
+
+    button.addEventListener("click",onClick,{once:true});
+
+    container.appendChild(button);
+
+    return button;
+}
+
+
+/* =========================================================
+   SCENE 1 — MANUAL MESSAGE BY MESSAGE
 ========================================================= */
 
 const introLines = [
@@ -1654,42 +1767,40 @@ let introIndex=0;
 
 function typeIntro(){
 
-    if(introIndex >= introLines.length){
+    const speech=document.querySelector("#scene1 .speech");
+    const text=$("introText");
 
-        $("scene1Btn").classList.remove("hidden");
-        return;
-    }
+    if(!speech || !text) return;
 
-    const text= $("introText");
+    const old=speech.querySelector(".continue-btn");
+    if(old) old.remove();
 
-    text.innerHTML="";
+    textTextSafe(text);
 
-    let chars=[...introLines[introIndex]];
-    let i=0;
+    typeText(text,introLines[introIndex],40,()=>{
 
-    const interval=setInterval(()=>{
+        if(introIndex < introLines.length-1){
 
-        text.innerHTML=chars.slice(0,i+1).join("");
-        i++;
-
-        if(i>=chars.length){
-
-            clearInterval(interval);
-
-            setTimeout(()=>{
-
-                introIndex++;
-
-                if(introIndex<introLines.length){
+            addContinueButton(
+                speech,
+                "Tap to continue →",
+                ()=>{
+                    introIndex++;
                     typeIntro();
-                }else{
-                    $("scene1Btn").classList.remove("hidden");
                 }
+            );
 
-            },1100);
+        }else{
+
+            $("scene1Btn").classList.remove("hidden");
+
         }
 
-    },28);
+    });
+}
+
+function textTextSafe(text){
+    text.innerHTML="";
 }
 
 setTimeout(typeIntro,700);
@@ -1718,10 +1829,11 @@ let rubCount=0;
 let lastX=null;
 let lastY=null;
 let rubCooldown=false;
+let genieTriggered=false;
 
 function lampRub(x,y){
 
-    if(rubCooldown) return;
+    if(rubCooldown || genieTriggered) return;
 
     if(lastX!==null){
 
@@ -1779,6 +1891,8 @@ function lampRub(x,y){
 
             if(rubCount>=3){
 
+                genieTriggered=true;
+
                 setTimeout(()=>{
                     burstHearts(12);
                     showScene("genieScene");
@@ -1823,7 +1937,7 @@ lamp.addEventListener("mouseup",()=>{
 
 
 /* =========================================================
-   GENIE DIALOGUE
+   GENIE DIALOGUE — MANUAL MESSAGE BY MESSAGE
 ========================================================= */
 
 const genieLines=[
@@ -1847,39 +1961,32 @@ function startGenieDialogue(){
 
 function typeGenieLine(){
 
-    if(genieLineIndex>=genieLines.length){
-
-        $("genieStartBtn").classList.remove("hidden");
-        return;
-    }
-
+    const speech=document.querySelector("#genieScene .genie-speech");
     const text=$("genieIntroText");
 
-    text.innerHTML="";
+    const old=speech.querySelector(".continue-btn");
+    if(old) old.remove();
 
-    const chars=[...genieLines[genieLineIndex]];
+    typeText(text,genieLines[genieLineIndex],40,()=>{
 
-    let i=0;
+        if(genieLineIndex < genieLines.length-1){
 
-    const interval=setInterval(()=>{
+            addContinueButton(
+                speech,
+                "Tap to continue →",
+                ()=>{
+                    genieLineIndex++;
+                    typeGenieLine();
+                }
+            );
 
-        text.innerHTML=chars.slice(0,i+1).join("");
-        i++;
+        }else{
 
-        if(i>=chars.length){
+            $("genieStartBtn").classList.remove("hidden");
 
-            clearInterval(interval);
-
-            setTimeout(()=>{
-
-                genieLineIndex++;
-
-                typeGenieLine();
-
-            },900);
         }
 
-    },25);
+    });
 }
 
 $("genieStartBtn").addEventListener("click",()=>{
@@ -1892,7 +1999,7 @@ $("genieStartBtn").addEventListener("click",()=>{
 
 
 /* =========================================================
-   WISHES
+   WISHES — NO AUTO DISAPPEARING
 ========================================================= */
 
 let currentWish=1;
@@ -1919,7 +2026,8 @@ function startWish(num){
         "The third wish...";
 
     $("wishDialogue").innerHTML=
-        wishTexts[num-1];
+        wishTexts[num-1] +
+        "<br><br><span class='highlight'>“Mujhe apne Baba ke saath rehna hai... zindagi bhar.” ❤️</span>";
 
     $("wishBtn").classList.add("hidden");
 
@@ -1933,36 +2041,24 @@ function startWish(num){
     photo.classList.remove("hidden");
 
     setTimeout(()=>{
+
         photo.classList.add("show");
-    },300);
-
-    setTimeout(()=>{
-
-        $("wishDialogue").innerHTML +=
-            "<br><br><span class='highlight'>“Mujhe apne Baba ke saath rehna hai... zindagi bhar.” ❤️</span>";
 
         burstHearts(6);
 
-        setTimeout(()=>{
+        if(num<3){
 
-            if(num<3){
+            $("wishBtn").textContent="Next wish ❤️";
 
-                $("wishBtn").textContent=
-                    "Next wish ❤️";
+        }else{
 
-                $("wishBtn").classList.remove("hidden");
+            $("wishBtn").textContent="There's something else... 💓";
 
-            }else{
+        }
 
-                $("wishBtn").textContent=
-                    "There's something else... 💓";
+        $("wishBtn").classList.remove("hidden");
 
-                $("wishBtn").classList.remove("hidden");
-            }
-
-        },700);
-
-    },1100);
+    },450);
 }
 
 $("wishBtn").addEventListener("click",()=>{
@@ -1981,7 +2077,7 @@ $("wishBtn").addEventListener("click",()=>{
 
 
 /* =========================================================
-   SCENE 3 HEART
+   SCENE 3 HEART — MANUAL MESSAGE BY MESSAGE
 ========================================================= */
 
 let heartStep=0;
@@ -1997,7 +2093,7 @@ const heartMessages=[
 
 $("heartUnlock").addEventListener("click",()=>{
 
-    if(heartStep>0) return;
+    if(heartStep!==0) return;
 
     heartStep=1;
 
@@ -2019,8 +2115,6 @@ $("heartUnlock").addEventListener("click",()=>{
 
         typeHeartMessage(0);
 
-        $("heartNext").classList.remove("hidden");
-
     },600);
 
 });
@@ -2029,47 +2123,39 @@ $("heartUnlock").addEventListener("click",()=>{
 function typeHeartMessage(index){
 
     const target=$("heartMessageText");
+    const button=$("heartNext");
 
-    target.innerHTML="";
+    button.classList.add("hidden");
 
-    const chars=[...heartMessages[index]];
+    typeText(target,heartMessages[index],40,()=>{
 
-    let i=0;
+        if(index < heartMessages.length-1){
 
-    const interval=setInterval(()=>{
+            button.textContent="Keep going ❤️";
 
-        target.innerHTML=chars.slice(0,i+1).join("");
+        }else{
 
-        i++;
+            button.textContent="Clear the sky 🌅";
 
-        if(i>=chars.length){
-
-            clearInterval(interval);
         }
 
-    },30);
+        button.classList.remove("hidden");
+
+    });
 }
 
 
 $("heartNext").addEventListener("click",()=>{
 
-    heartStep++;
+    if(heartStep < 3){
 
-    if(heartStep<=3){
+        typeHeartMessage(heartStep);
+        heartStep++;
 
-        typeHeartMessage(heartStep-1);
+    }else{
 
-        if(heartStep===3){
-
-            $("heartNext").textContent=
-                "Clear the sky 🌅";
-
-            $("heartNext").onclick=()=>{
-
-                showScene("rainScene");
-                createRain();
-            };
-        }
+        showScene("rainScene");
+        createRain();
 
     }
 
@@ -2283,6 +2369,7 @@ document.addEventListener("pointerdown",()=>{
 },{once:true});
 
 </script>
+
 
 </body>
 </html>
