@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#090713">
+<title>For Bba ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&display=swap');
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    background:#080611;
+    color:white;
+    font-family:Inter,sans-serif;
+    overflow:hidden;
+}
+
+body{
+    position:relative;
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+#app{
+    position:relative;
+    width:100%;
+    height:100dvh;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(84,35,105,.24), transparent 35%),
+        radial-gradient(circle at 20% 80%, rgba(24,48,100,.20), transparent 38%),
+        #080611;
+}
+
+.scene{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:25px 20px;
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.025);
+    transition:
+        opacity .75s ease,
+        transform .9s cubic-bezier(.22,.8,.2,1),
+        visibility .75s;
+    overflow:hidden;
+    z-index:2;
+}
+
+.scene.active{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+.scene.exit{
+    opacity:0;
+    transform:scale(.97);
+}
+
+/* =========================================================
+   FLOATING PINK HEARTS — THROUGHOUT WEBSITE
+========================================================= */
+
+#heart-layer{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:100;
+}
+
+.float-heart{
+    position:absolute;
+    bottom:-50px;
+    left:var(--x);
+    font-size:var(--size);
+    opacity:0;
+    filter:
+        drop-shadow(0 0 5px rgba(255,95,180,.9))
+        drop-shadow(0 0 16px rgba(255,54,160,.65));
+    animation:heartFloat var(--duration) linear forwards;
+}
+
+@keyframes heartFloat{
+    0%{
+        transform:translate3d(0,0,0) scale(.65) rotate(-8deg);
+        opacity:0;
+    }
+    10%{opacity:.75;}
+    45%{
+        transform:translate3d(var(--drift),-45vh,0) scale(1) rotate(8deg);
+        opacity:.72;
+    }
+    80%{
+        transform:translate3d(calc(var(--drift) * -.5),-82vh,0) scale(.9) rotate(-5deg);
+        opacity:.45;
+    }
+    100%{
+        transform:translate3d(var(--drift),-115vh,0) scale(.6);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   COMMON
+========================================================= */
+
+.eyebrow{
+    font-family:Orbitron,sans-serif;
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#ff9bd0;
+    margin-bottom:14px;
+}
+
+.title{
+    font-family:Caveat,cursive;
+    font-size:48px;
+    line-height:.95;
+    text-align:center;
+    margin:0;
+}
+
+.subtitle{
+    color:#cfc7d7;
+    font-size:14px;
+    line-height:1.7;
+    text-align:center;
+    max-width:320px;
+    margin:14px auto 0;
+}
+
+.btn{
+    border:1px solid rgba(255,145,205,.55);
+    background:
+        linear-gradient(135deg,rgba(255,86,175,.2),rgba(107,62,160,.18));
+    color:#fff;
+    padding:14px 24px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:600;
+    box-shadow:
+        0 0 18px rgba(255,65,170,.16),
+        inset 0 0 18px rgba(255,255,255,.025);
+    backdrop-filter:blur(12px);
+    cursor:pointer;
+    transition:.25s;
+    position:relative;
+    z-index:20;
+}
+
+.btn:active{
+    transform:scale(.95);
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================================================
+   SCENE 1
+========================================================= */
+
+#scene1{
+    background:
+        radial-gradient(circle at 50% 38%,rgba(255,67,172,.13),transparent 28%),
+        radial-gradient(circle at 50% 100%,rgba(68,40,115,.25),transparent 45%);
+}
+
+.intro-character{
+    width:145px;
+    height:180px;
+    position:relative;
+    margin-bottom:10px;
+    animation:characterFloat 3s ease-in-out infinite;
+}
+
+@keyframes characterFloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+}
+
+.character-head{
+    width:96px;
+    height:96px;
+    background:linear-gradient(145deg,#ffd8bf,#eeb091);
+    border-radius:50%;
+    position:absolute;
+    top:12px;
+    left:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.character-hair{
+    position:absolute;
+    width:103px;
+    height:54px;
+    left:-4px;
+    top:-9px;
+    background:#211622;
+    border-radius:55% 55% 40% 40%;
+}
+
+.character-ear{
+    width:17px;
+    height:25px;
+    background:#efb392;
+    border-radius:50%;
+    position:absolute;
+    top:50px;
+}
+
+.character-ear.left{left:-8px;}
+.character-ear.right{right:-8px;}
+
+.eye{
+    position:absolute;
+    width:8px;
+    height:11px;
+    background:#241b25;
+    border-radius:50%;
+    top:48px;
+}
+
+.eye.left{left:29px;}
+.eye.right{right:29px;}
+
+.mouth{
+    position:absolute;
+    width:26px;
+    height:12px;
+    border-bottom:3px solid #9b4f67;
+    border-radius:50%;
+    left:35px;
+    top:69px;
+}
+
+.character-body{
+    position:absolute;
+    width:125px;
+    height:92px;
+    bottom:0;
+    left:10px;
+    border-radius:55px 55px 20px 20px;
+    background:linear-gradient(145deg,#26213c,#171426);
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.character-heart{
+    position:absolute;
+    top:23px;
+    left:52px;
+    font-size:25px;
+    filter:drop-shadow(0 0 9px rgba(255,64,170,.9));
+}
+
+.speech{
+    width:min(340px,92vw);
+    min-height:155px;
+    padding:20px 20px 18px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,157,214,.18);
+    border-radius:24px;
+    backdrop-filter:blur(15px);
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+    position:relative;
+}
+
+.speech:before{
+    content:"";
+    position:absolute;
+    top:-9px;
+    left:50%;
+    width:18px;
+    height:18px;
+    transform:translateX(-50%) rotate(45deg);
+    background:rgba(26,19,34,.9);
+    border-left:1px solid rgba(255,157,214,.18);
+    border-top:1px solid rgba(255,157,214,.18);
+}
+
+.speech-text{
+    font-family:Caveat,cursive;
+    font-size:23px;
+    line-height:1.35;
+    text-align:center;
+    min-height:100px;
+}
+
+.speech-text .pink{
+    color:#ff9bd0;
+    text-shadow:0 0 12px rgba(255,80,180,.6);
+}
+
+/* =========================================================
+   SCENE 2 — MAGIC LAMP
+========================================================= */
+
+#scene2{
+    background:
+        radial-gradient(circle at 50% 45%,rgba(26,98,150,.17),transparent 35%),
+        #070b16;
+}
+
+.lamp-wrap{
+    position:relative;
+    width:220px;
+    height:220px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:5px 0 12px;
+}
+
+.magic-ring{
+    position:absolute;
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    border:1px solid rgba(93,191,255,.18);
+    box-shadow:0 0 50px rgba(50,161,255,.12);
+    animation:ringPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ringPulse{
+    50%{transform:scale(1.08);opacity:.55;}
+}
+
+.lamp{
+    width:145px;
+    height:82px;
+    position:relative;
+    transform:rotate(-8deg);
+    touch-action:none;
+    cursor:grab;
+    filter:drop-shadow(0 0 22px rgba(63,172,255,.45));
+}
+
+.lamp-body{
+    position:absolute;
+    width:90px;
+    height:48px;
+    left:25px;
+    top:27px;
+    background:linear-gradient(145deg,#ffd66e,#b87528);
+    border-radius:55% 50% 42% 60%;
+}
+
+.lamp-body:after{
+    content:"";
+    position:absolute;
+    width:68px;
+    height:18px;
+    background:#f6bf50;
+    left:11px;
+    bottom:-8px;
+    border-radius:50%;
+}
+
+.lamp-neck{
+    position:absolute;
+    width:27px;
+    height:34px;
+    background:#d89837;
+    left:77px;
+    top:0;
+    border-radius:50% 50% 10px 10px;
+}
+
+.lamp-spout{
+    position:absolute;
+    width:48px;
+    height:22px;
+    border-top:12px solid #d89837;
+    border-radius:50%;
+    left:-6px;
+    top:28px;
+    transform:rotate(-15deg);
+}
+
+.lamp-handle{
+    position:absolute;
+    width:45px;
+    height:38px;
+    border:8px solid #d89837;
+    border-left-color:transparent;
+    border-radius:50%;
+    right:-6px;
+    top:28px;
+}
+
+.lamp-label{
+    position:absolute;
+    top:-54px;
+    left:50%;
+    transform:translateX(-50%);
+    white-space:nowrap;
+    font-family:Caveat,cursive;
+    color:#bce7ff;
+    font-size:25px;
+    text-shadow:0 0 14px rgba(79,186,255,.8);
+}
+
+.rub-progress{
+    font-size:11px;
+    letter-spacing:2px;
+    color:#7ebee6;
+    margin-top:4px;
+}
+
+#rubHint{
+    margin-top:9px;
+    font-size:12px;
+    color:#aaa7b5;
+}
+
+/* =========================================================
+   GENIE
+========================================================= */
+
+.genie{
+    position:relative;
+    width:150px;
+    height:190px;
+    margin-bottom:4px;
+    animation:genieFloat 3s ease-in-out infinite;
+}
+
+@keyframes genieFloat{
+    50%{transform:translateY(-9px);}
+}
+
+.genie-smoke{
+    position:absolute;
+    width:150px;
+    height:80px;
+    bottom:-8px;
+    left:0;
+    background:
+        radial-gradient(circle at 20% 60%,rgba(40,183,255,.32),transparent 35%),
+        radial-gradient(circle at 75% 40%,rgba(112,74,255,.3),transparent 35%);
+    filter:blur(8px);
+    border-radius:50%;
+}
+
+.genie-head{
+    position:absolute;
+    width:78px;
+    height:78px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#69dfff,#1b7dcc);
+    left:36px;
+    top:18px;
+    box-shadow:0 0 28px rgba(48,174,255,.4);
+}
+
+.genie-turban{
+    position:absolute;
+    width:90px;
+    height:32px;
+    background:linear-gradient(135deg,#a9eaff,#327fe5);
+    border-radius:50% 50% 30% 30%;
+    left:-6px;
+    top:-12px;
+}
+
+.genie-jewel{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:#ff8fda;
+    border-radius:50%;
+    left:40px;
+    top:2px;
+    box-shadow:0 0 10px #ff65c5;
+}
+
+.genie-eye{
+    position:absolute;
+    width:7px;
+    height:10px;
+    border-radius:50%;
+    background:#10253d;
+    top:38px;
+}
+
+.genie-eye.left{left:23px;}
+.genie-eye.right{right:23px;}
+
+.genie-mouth{
+    position:absolute;
+    width:25px;
+    height:11px;
+    border-bottom:3px solid #164c7a;
+    border-radius:50%;
+    left:27px;
+    top:55px;
+}
+
+.genie-body{
+    position:absolute;
+    width:105px;
+    height:92px;
+    left:23px;
+    top:89px;
+    background:linear-gradient(145deg,#39c8ed,#1556a6);
+    border-radius:55% 55% 20px 20px;
+    box-shadow:0 0 30px rgba(31,145,255,.28);
+}
+
+.genie-arm{
+    position:absolute;
+    width:58px;
+    height:18px;
+    background:#238ac8;
+    border-radius:30px;
+    top:106px;
+}
+
+.genie-arm.left{
+    left:-18px;
+    transform:rotate(22deg);
+}
+
+.genie-arm.right{
+    right:-18px;
+    transform:rotate(-22deg);
+}
+
+.genie-speech{
+    width:min(350px,92vw);
+    padding:18px 18px;
+    border-radius:22px;
+    background:rgba(45,123,188,.10);
+    border:1px solid rgba(103,210,255,.25);
+    backdrop-filter:blur(14px);
+}
+
+.genie-text{
+    font-family:Caveat,cursive;
+    font-size:22px;
+    text-align:center;
+    line-height:1.35;
+}
+
+.wish-question{
+    font-family:Orbitron,sans-serif;
+    font-size:10px;
+    letter-spacing:1.5px;
+    color:#83dfff;
+    text-align:center;
+    margin:13px 0;
+}
+
+/* =========================================================
+   PHOTO CLOUDS
+========================================================= */
+
+.photo-cloud{
+    width:min(145px,39vw);
+    aspect-ratio:1/1;
+    border-radius:50%;
+    position:relative;
+    margin:8px auto;
+    opacity:0;
+    transform:translateY(22px) scale(.7);
+    transition:1s cubic-bezier(.2,.8,.2,1);
+}
+
+.photo-cloud.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+.photo-cloud:before,
+.photo-cloud:after{
+    content:"";
+    position:absolute;
+    background:rgba(255,255,255,.92);
+    border-radius:50%;
+    filter:blur(1px);
+    box-shadow:0 0 18px rgba(255,177,230,.35);
+}
+
+.photo-cloud:before{
+    width:70px;
+    height:70px;
+    left:-14px;
+    bottom:8px;
+}
+
+.photo-cloud:after{
+    width:85px;
+    height:85px;
+    right:-14px;
+    bottom:3px;
+}
+
+.photo-cloud img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    position:relative;
+    z-index:3;
+    border:3px solid rgba(255,255,255,.7);
+    box-shadow:
+        0 0 0 5px rgba(255,139,207,.08),
+        0 0 35px rgba(255,72,177,.28);
+}
+
+.wish-photo-area{
+    display:flex;
+    justify-content:center;
+    gap:3px;
+    width:100%;
+    margin:5px 0;
+}
+
+/* =========================================================
+   SCENE 2 WISH MODE
+========================================================= */
+
+#wishScene{
+    justify-content:flex-start;
+    padding-top:26px;
+}
+
+.wish-counter{
+    font-family:Orbitron,sans-serif;
+    font-size:9px;
+    letter-spacing:2px;
+    color:#81dfff;
+    margin-bottom:7px;
+}
+
+.wish-number{
+    font-family:Caveat,cursive;
+    font-size:29px;
+    color:#ffabd8;
+    margin-bottom:5px;
+}
+
+.wish-dialogue{
+    max-width:350px;
+    text-align:center;
+    font-family:Caveat,cursive;
+    font-size:23px;
+    line-height:1.25;
+    min-height:90px;
+}
+
+.wish-dialogue .highlight{
+    color:#ff9bd0;
+    text-shadow:0 0 15px rgba(255,74,173,.6);
+}
+
+.wish-continue{
+    margin-top:8px;
+}
+
+/* =========================================================
+   SCENE 3
+========================================================= */
+
+#scene3{
+    background:
+        radial-gradient(circle at 50% 38%,rgba(255,74,174,.14),transparent 31%),
+        radial-gradient(circle at 50% 90%,rgba(51,103,255,.14),transparent 42%),
+        #080711;
+}
+
+.heart-lock{
+    width:145px;
+    height:145px;
+    margin:16px 0 22px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.big-heart{
+    font-size:105px;
+    line-height:1;
+    filter:
+        drop-shadow(0 0 10px rgba(255,68,173,.8))
+        drop-shadow(0 0 38px rgba(255,50,164,.45));
+    animation:heartBeat 1.6s ease-in-out infinite;
+}
+
+@keyframes heartBeat{
+    0%,100%{transform:scale(1);}
+    12%{transform:scale(1.09);}
+    25%{transform:scale(1);}
+    37%{transform:scale(1.06);}
+}
+
+.lock{
+    position:absolute;
+    font-size:25px;
+    bottom:25px;
+    right:19px;
+    filter:drop-shadow(0 0 9px rgba(255,255,255,.5));
+}
+
+.heart-instruction{
+    font-size:12px;
+    color:#bcb5c7;
+    margin-top:-8px;
+}
+
+.heart-message{
+    width:min(340px,92vw);
+    min-height:145px;
+    padding:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:Caveat,cursive;
+    font-size:25px;
+    line-height:1.3;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,144,207,.18);
+    border-radius:25px;
+    backdrop-filter:blur(15px);
+}
+
+/* =========================================================
+   SCENE 3 RAIN / SUNRISE
+========================================================= */
+
+#rainScene{
+    background:
+        linear-gradient(to bottom,rgba(9,15,42,.96),rgba(12,11,25,.99));
+}
+
+.cloud-container{
+    position:relative;
+    width:330px;
+    height:290px;
+    margin-top:10px;
+}
+
+.cloud{
+    position:absolute;
+    width:125px;
+    height:58px;
+    border-radius:50px;
+    background:linear-gradient(180deg,#33384c,#202333);
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:1s cubic-bezier(.2,.8,.2,1);
+}
+
+.cloud:before,
+.cloud:after{
+    content:"";
+    position:absolute;
+    background:#33384c;
+    border-radius:50%;
+}
+
+.cloud:before{
+    width:55px;
+    height:55px;
+    left:20px;
+    top:-27px;
+}
+
+.cloud:after{
+    width:65px;
+    height:65px;
+    right:18px;
+    top:-34px;
+}
+
+.cloud span{
+    position:relative;
+    z-index:2;
+    font-family:Orbitron,sans-serif;
+    font-size:8px;
+    letter-spacing:1.5px;
+    color:#d8d7e3;
+}
+
+.cloud:nth-child(1){left:8px;top:20px;}
+.cloud:nth-child(2){right:5px;top:92px;}
+.cloud:nth-child(3){left:82px;top:164px;}
+
+.cloud.removed{
+    opacity:0;
+    transform:translateY(-110px) scale(.4) rotate(18deg);
+    pointer-events:none;
+}
+
+.sun{
+    position:absolute;
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    left:50%;
+    top:100px;
+    transform:translateX(-50%) scale(.2);
+    opacity:0;
+    background:radial-gradient(circle,#fff0a8,#ffb75a);
+    box-shadow:0 0 55px rgba(255,188,87,.65);
+    transition:1.6s ease;
+}
+
+.sun.risen{
+    opacity:1;
+    transform:translateX(-50%) scale(1);
+}
+
+.rain-drop{
+    position:absolute;
+    width:2px;
+    height:15px;
+    background:linear-gradient(transparent,#83b7ff);
+    opacity:.5;
+    animation:rainFall 1s linear infinite;
+}
+
+@keyframes rainFall{
+    from{transform:translateY(-40px);}
+    to{transform:translateY(300px);}
+}
+
+.sunrise-text{
+    position:absolute;
+    bottom:12px;
+    width:100%;
+    text-align:center;
+    opacity:0;
+    transition:1s;
+    font-family:Caveat,cursive;
+    font-size:25px;
+    color:#ffe4ef;
+}
+
+.sunrise-text.show{
+    opacity:1;
+}
+
+/* =========================================================
+   SCENE 4 LETTER
+========================================================= */
+
+#scene4{
+    justify-content:flex-start;
+    padding-top:24px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(255,79,172,.13),transparent 32%),
+        #090711;
+}
+
+.envelope{
+    width:145px;
+    height:100px;
+    position:relative;
+    margin:18px 0 18px;
+    cursor:pointer;
+    transition:1s;
+}
+
+.envelope-body{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(145deg,#d878a7,#824b82);
+    border-radius:9px;
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+
+.envelope-flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border-left:72px solid transparent;
+    border-right:72px solid transparent;
+    border-top:52px solid #ef9bc4;
+    transform-origin:top center;
+    transition:1s;
+    z-index:3;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.envelope-heart{
+    position:absolute;
+    left:50%;
+    top:42px;
+    transform:translateX(-50%);
+    font-size:30px;
+    z-index:4;
+    transition:.5s;
+}
+
+.envelope.open .envelope-heart{
+    opacity:0;
+    transform:translateX(-50%) scale(1.4);
+}
+
+.letter{
+    width:min(370px,94vw);
+    background:
+        linear-gradient(145deg,rgba(255,248,251,.98),rgba(245,228,239,.97));
+    color:#342331;
+    border-radius:22px;
+    padding:25px 21px 28px;
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.45),
+        0 0 35px rgba(255,78,172,.12);
+    transform:translateY(30px);
+    opacity:0;
+    transition:1s;
+    margin-bottom:30px;
+}
+
+.letter.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.letter-header{
+    font-family:Caveat,cursive;
+    font-size:31px;
+    text-align:center;
+    color:#9c4c76;
+    margin-bottom:17px;
+}
+
+.letter-body{
+    font-family:Caveat,cursive;
+    font-size:21px;
+    line-height:1.45;
+}
+
+.letter-body p{
+    margin:0 0 13px;
+}
+
+.letter-body strong{
+    color:#a34878;
+}
+
+.signature{
+    text-align:right;
+    font-size:27px;
+    color:#9c4c76;
+    margin-top:15px;
+}
+
+/* =========================================================
+   FINAL REVEAL
+========================================================= */
+
+#finalScene{
+    background:
+        radial-gradient(circle at 50% 45%,rgba(255,60,167,.18),transparent 35%),
+        #080611;
+}
+
+.final-photo{
+    width:min(260px,72vw);
+    aspect-ratio:1/1;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid rgba(255,189,224,.8);
+    box-shadow:
+        0 0 0 8px rgba(255,95,181,.08),
+        0 0 60px rgba(255,62,173,.35);
+    animation:photoReveal 1.4s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes photoReveal{
+    from{opacity:0;transform:scale(.45) rotate(-8deg);}
+    to{opacity:1;transform:scale(1) rotate(0);}
+}
+
+.final-you{
+    font-family:Caveat,cursive;
+    font-size:65px;
+    color:#ffabd8;
+    text-shadow:0 0 25px rgba(255,65,174,.7);
+    margin-top:12px;
+}
+
+.final-line{
+    font-family:Caveat,cursive;
+    font-size:25px;
+    text-align:center;
+    line-height:1.25;
+    max-width:320px;
+    margin:4px auto 20px;
+}
+
+/* =========================================================
+   CONFETTI / HEART BURST
+========================================================= */
+
+.burst-heart{
+    position:fixed;
+    left:50%;
+    top:50%;
+    font-size:25px;
+    pointer-events:none;
+    z-index:300;
+    animation:burst 1.5s ease-out forwards;
+}
+
+@keyframes burst{
+    from{
+        transform:translate(-50%,-50%) scale(.4);
+        opacity:1;
+    }
+    to{
+        transform:
+            translate(
+                calc(-50% + var(--bx)),
+                calc(-50% + var(--by))
+            )
+            rotate(var(--rot))
+            scale(1.2);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+.music-toggle{
+    position:fixed;
+    right:13px;
+    top:13px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid rgba(255,157,214,.3);
+    background:rgba(15,11,23,.6);
+    color:#ff9bd0;
+    z-index:500;
+    backdrop-filter:blur(10px);
+}
+
+/* =========================================================
+   SMALL SCREEN ADJUSTMENTS
+========================================================= */
+
+@media(max-height:700px){
+    .intro-character{
+        transform:scale(.82);
+        margin-top:-18px;
+        margin-bottom:-16px;
+    }
+
+    .title{font-size:42px;}
+
+    .speech{min-height:135px;}
+    .speech-text{font-size:20px;}
+
+    .lamp-wrap{
+        transform:scale(.85);
+        margin-top:-5px;
+        margin-bottom:-10px;
+    }
+
+    .genie{
+        transform:scale(.82);
+        margin-top:-15px;
+        margin-bottom:-22px;
+    }
+
+    .big-heart{
+        font-size:85px;
+    }
+
+    .heart-lock{
+        margin:8px 0 15px;
+        height:120px;
+    }
+
+    .letter{
+        padding:20px 18px 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- GLOBAL HEARTS -->
+    <div id="heart-layer"></div>
+
+    <!-- MUSIC -->
+    <button class="music-toggle" id="musicToggle">♫</button>
+
+    <!-- =====================================================
+         SCENE 1
+    ====================================================== -->
+    <section class="scene active" id="scene1">
+
+        <div class="eyebrow">A little message for you</div>
+
+        <div class="intro-character">
+            <div class="character-head">
+                <div class="character-hair"></div>
+                <div class="character-ear left"></div>
+                <div class="character-ear right"></div>
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="mouth"></div>
+            </div>
+
+            <div class="character-body">
+                <div class="character-heart">❤️</div>
+            </div>
+        </div>
+
+        <div class="speech">
+            <div class="speech-text" id="introText"></div>
+        </div>
+
+        <button class="btn hidden" id="scene1Btn">
+            Souvick ki baat suno ❤️
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCENE 2 — LAMP
+    ====================================================== -->
+    <section class="scene" id="scene2">
+
+        <div class="eyebrow">A little magic</div>
+
+        <h1 class="title">Rub for Something...</h1>
+
+        <div class="lamp-wrap">
+
+            <div class="magic-ring"></div>
+
+            <div class="lamp" id="lamp">
+
+                <div class="lamp-label">Rub me ✨</div>
+
+                <div class="lamp-neck"></div>
+                <div class="lamp-spout"></div>
+                <div class="lamp-handle"></div>
+                <div class="lamp-body"></div>
+
+            </div>
+
+        </div>
+
+        <div class="rub-progress" id="rubProgress">
+            0 / 3 RUBS
+        </div>
+
+        <div id="rubHint">
+            Swipe your finger across the lamp
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCENE 2B — GENIE
+    ====================================================== -->
+    <section class="scene" id="genieScene">
+
+        <div class="genie">
+
+            <div class="genie-smoke"></div>
+
+            <div class="genie-head">
+                <div class="genie-turban">
+                    <div class="genie-jewel"></div>
+                </div>
+
+                <div class="genie-eye left"></div>
+                <div class="genie-eye right"></div>
+                <div class="genie-mouth"></div>
+            </div>
+
+            <div class="genie-body"></div>
+
+            <div class="genie-arm left"></div>
+            <div class="genie-arm right"></div>
+
+        </div>
+
+        <div class="genie-speech">
+            <div class="genie-text" id="genieIntroText"></div>
+        </div>
+
+        <button class="btn hidden" id="genieStartBtn">
+            Tell me more ✨
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCENE 2C — WISHES
+    ====================================================== -->
+    <section class="scene" id="wishScene">
+
+        <div class="wish-counter" id="wishCounter">
+            WISH 1 OF 3
+        </div>
+
+        <div class="wish-number" id="wishNumber">
+            The first wish...
+        </div>
+
+        <div class="wish-dialogue" id="wishDialogue"></div>
+
+        <div class="wish-photo-area">
+
+            <div class="photo-cloud" id="photoCloud1">
+                <img src="photo1.jpg" alt="Memory 1">
+            </div>
+
+            <div class="photo-cloud hidden" id="photoCloud2">
+                <img src="photo2.jpg" alt="Memory 2">
+            </div>
+
+            <div class="photo-cloud hidden" id="photoCloud3">
+                <img src="photo3.jpg" alt="Memory 3">
+            </div>
+
+        </div>
+
+        <button class="btn hidden wish-continue" id="wishBtn">
+            Next wish ❤️
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCENE 3 — HEART
+    ====================================================== -->
+    <section class="scene" id="scene3">
+
+        <div class="eyebrow">The Heart That Couldn't Speak</div>
+
+        <h1 class="title">One last little thing...</h1>
+
+        <div class="heart-lock" id="heartUnlock">
+
+            <div class="big-heart">❤️</div>
+
+            <div class="lock">🔐</div>
+
+        </div>
+
+        <div class="heart-instruction">
+            Tap the heart to unlock
+        </div>
+
+        <div class="heart-message hidden" id="heartMessage">
+            <span id="heartMessageText"></span>
+        </div>
+
+        <button class="btn hidden" id="heartNext">
+            Keep going ❤️
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCENE 3B — CLOUD / RAIN
+    ====================================================== -->
+    <section class="scene" id="rainScene">
+
+        <div class="eyebrow">Let's clear the sky</div>
+
+        <h1 class="title">Just three little clouds...</h1>
+
+        <p class="subtitle">
+            Some things get in the way of saying what we really mean.
+        </p>
+
+        <div class="cloud-container" id="cloudContainer">
+
+            <div class="sun" id="sun"></div>
+
+            <div class="cloud">
+                <span>EGO</span>
+            </div>
+
+            <div class="cloud">
+                <span>MISUNDERSTANDING</span>
+            </div>
+
+            <div class="cloud">
+                <span>ANGER</span>
+            </div>
+
+            <div class="sunrise-text" id="sunriseText">
+                Sometimes all we need is a little clearer sky. 🌅
+            </div>
+
+        </div>
+
+        <button class="btn hidden" id="rainNext">
+            There's something I want to say 💌
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCENE 4 — ENVELOPE
+    ====================================================== -->
+    <section class="scene" id="scene4">
+
+        <div class="eyebrow">From Souvick to Bba</div>
+
+        <h1 class="title">A Letter I Couldn't Say Out Loud</h1>
+
+        <div class="envelope" id="envelope">
+
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-heart">❤️</div>
+
+        </div>
+
+        <button class="btn" id="openLetterBtn">
+            Open my letter 💌
+        </button>
+
+        <div class="letter" id="letter">
+
+            <div class="letter-header">
+                Dear Bba, ❤️
+            </div>
+
+            <div class="letter-body">
+
+                <p>
+                    I know you're angry with me, and honestly,
+                    I understand why.
+                </p>
+
+                <p>
+                    I know I made a mistake. I know my actions
+                    hurt you, and I'm genuinely sorry for that.
+                </p>
+
+                <p>
+                    I'm not writing this to make excuses or to ask
+                    you to forget everything immediately.
+                </p>
+
+                <p>
+                    I just want you to know that I realise where
+                    I went wrong.
+                </p>
+
+                <p>
+                    <strong>
+                    You mean so much more to me than I sometimes
+                    know how to express.
+                    </strong>
+                </p>
+
+                <p>
+                    And maybe that's why it hurts me even more
+                    knowing that I became the reason behind your sadness.
+                </p>
+
+                <p>
+                    Bba, I'm not promising that I'll suddenly
+                    become perfect.
+                </p>
+
+                <p>
+                    But I can promise that I'll learn from this.
+                    I'll listen better. I'll understand better.
+                    And I'll try harder to make sure that my
+                    mistakes don't keep hurting the person I love.
+                </p>
+
+                <p>
+                    <strong>
+                    I'm really, really sorry. ❤️
+                    </strong>
+                </p>
+
+                <p>
+                    I don't expect you to forgive me just because
+                    I made this little website.
+                </p>
+
+                <p>
+                    Take your time.
+                </p>
+
+                <p>
+                    Be angry if you need to.
+                </p>
+
+                <p>
+                    But whenever you're ready...
+                </p>
+
+                <p>
+                    <strong>
+                    I hope you let me make things right.
+                    </strong>
+                </p>
+
+                <p>
+                    I love you, Bba. ❤️
+                </p>
+
+                <div class="signature">
+                    — Souvick
+                </div>
+
+            </div>
+
+            <button class="btn" id="finalBtn">
+                One last thing... ❤️
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL SCENE
+    ====================================================== -->
+    <section class="scene" id="finalScene">
+
+        <div class="eyebrow">One last thing...</div>
+
+        <img
+            class="final-photo"
+            src="photo4.jpg"
+            alt="Our memory"
+        >
+
+        <div class="final-you">
+            You ❤️
+        </div>
+
+        <div class="final-line">
+            No matter how many wishes that genie gives me...
+            <br>
+            <strong>I already know what mine is.</strong>
+        </div>
+
+        <button class="btn" id="youBtn">
+            What is it? 🥺
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL ANSWER
+    ====================================================== -->
+    <section class="scene" id="answerScene">
+
+        <div class="eyebrow">My answer is simple</div>
+
+        <div class="big-heart">❤️</div>
+
+        <div class="final-you">
+            You.
+        </div>
+
+        <p class="subtitle">
+            Thank you for hearing me out, Bba.
+            <br><br>
+            I love you. ❤️
+        </p>
+
+        <button class="btn" id="angryBtn">
+            I'm still angry 😤
+        </button>
+
+        <button class="btn hidden" id="maybeBtn">
+            Maybe... ❤️
+        </button>
+
+        <div
+            id="finalResponse"
+            style="
+                margin-top:18px;
+                font-family:Caveat,cursive;
+                font-size:25px;
+                text-align:center;
+                max-width:320px;
+            "
+        ></div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+const $ = id => document.getElementById(id);
+
+let currentScene = "scene1";
+
+function showScene(id){
+
+    document.querySelectorAll(".scene").forEach(scene=>{
+        scene.classList.remove("active");
+    });
+
+    const next = $(id);
+
+    if(next){
+        next.classList.add("active");
+        currentScene = id;
+    }
+}
+
+function burstHearts(count=18){
+
+    for(let i=0;i<count;i++){
+
+        const h=document.createElement("div");
+
+        h.className="burst-heart";
+        h.innerHTML=Math.random()>.25 ? "❤️" : "💗";
+
+        h.style.setProperty("--bx",
+            ((Math.random()-.5)*330)+"px"
+        );
+
+        h.style.setProperty("--by",
+            ((Math.random()-.5)*500)+"px"
+        );
+
+        h.style.setProperty("--rot",
+            ((Math.random()-.5)*80)+"deg"
+        );
+
+        document.body.appendChild(h);
+
+        setTimeout(()=>h.remove(),1600);
+    }
+}
+
+
+/* =========================================================
+   GLOBAL FLOATING HEARTS
+========================================================= */
+
+function createFloatingHeart(){
+
+    const h=document.createElement("div");
+
+    h.className="float-heart";
+    h.innerHTML=Math.random()>.2 ? "💗" : "💕";
+
+    h.style.setProperty(
+        "--x",
+        Math.random()*100+"%"
+    );
+
+    h.style.setProperty(
+        "--size",
+        (10+Math.random()*15)+"px"
+    );
+
+    h.style.setProperty(
+        "--duration",
+        (7+Math.random()*7)+"s"
+    );
+
+    h.style.setProperty(
+        "--drift",
+        ((Math.random()-.5)*100)+"px"
+    );
+
+    $("heart-layer").appendChild(h);
+
+    setTimeout(()=>h.remove(),15000);
+}
+
+setInterval(createFloatingHeart,700);
+
+for(let i=0;i<7;i++){
+    setTimeout(createFloatingHeart,i*400);
+}
+
+
+/* =========================================================
+   SCENE 1 TYPEWRITER
+========================================================= */
+
+const introLines = [
+    "Arey Bhabhi... 👀",
+    "Souvick bhai ko pata hai ki usne galti kari hai...",
+    "Aur sach bolun toh usko iska guilt bhi bahut zyada hai. 🥺",
+    "Lekin ek baat mujhe personally pata hai...",
+    "Ye ladka aapse bahut pyaar karta hai. ❤️",
+    "Toh ek baar uski baat sun lena..."
+];
+
+let introIndex=0;
+
+function typeIntro(){
+
+    if(introIndex >= introLines.length){
+
+        $("scene1Btn").classList.remove("hidden");
+        return;
+    }
+
+    const text= $("introText");
+
+    text.innerHTML="";
+
+    let chars=[...introLines[introIndex]];
+    let i=0;
+
+    const interval=setInterval(()=>{
+
+        text.innerHTML=chars.slice(0,i+1).join("");
+        i++;
+
+        if(i>=chars.length){
+
+            clearInterval(interval);
+
+            setTimeout(()=>{
+
+                introIndex++;
+
+                if(introIndex<introLines.length){
+                    typeIntro();
+                }else{
+                    $("scene1Btn").classList.remove("hidden");
+                }
+
+            },1100);
+        }
+
+    },28);
+}
+
+setTimeout(typeIntro,700);
+
+
+/* =========================================================
+   SCENE 1 → SCENE 2
+========================================================= */
+
+$("scene1Btn").addEventListener("click",()=>{
+
+    burstHearts(10);
+
+    showScene("scene2");
+
+});
+
+
+/* =========================================================
+   LAMP RUB
+========================================================= */
+
+const lamp=$("lamp");
+
+let rubCount=0;
+let lastX=null;
+let lastY=null;
+let rubCooldown=false;
+
+function lampRub(x,y){
+
+    if(rubCooldown) return;
+
+    if(lastX!==null){
+
+        const distance=Math.hypot(
+            x-lastX,
+            y-lastY
+        );
+
+        if(distance>18){
+
+            rubCooldown=true;
+
+            rubCount++;
+
+            $("rubProgress").textContent =
+                rubCount+" / 3 RUBS";
+
+            lamp.animate(
+                [
+                    {transform:"rotate(-8deg) scale(1)"},
+                    {transform:"rotate(8deg) scale(1.06)"},
+                    {transform:"rotate(-8deg) scale(1)"}
+                ],
+                {duration:300}
+            );
+
+            for(let i=0;i<5;i++){
+
+                const sparkle=document.createElement("div");
+
+                sparkle.innerHTML="✨";
+
+                sparkle.style.position="fixed";
+                sparkle.style.left=x+"px";
+                sparkle.style.top=y+"px";
+                sparkle.style.pointerEvents="none";
+                sparkle.style.zIndex="200";
+
+                document.body.appendChild(sparkle);
+
+                sparkle.animate(
+                    [
+                        {transform:"translate(0,0) scale(.5)",opacity:1},
+                        {
+                            transform:
+                                `translate(${(Math.random()-.5)*90}px,${-40-Math.random()*80}px) scale(1)`,
+                            opacity:0
+                        }
+                    ],
+                    {duration:700}
+                ).onfinish=()=>sparkle.remove();
+            }
+
+            setTimeout(()=>rubCooldown=false,260);
+
+            if(rubCount>=3){
+
+                setTimeout(()=>{
+                    burstHearts(12);
+                    showScene("genieScene");
+                    startGenieDialogue();
+                },500);
+
+            }
+        }
+    }
+
+    lastX=x;
+    lastY=y;
+}
+
+lamp.addEventListener("touchmove",e=>{
+
+    const t=e.touches[0];
+
+    e.preventDefault();
+
+    lampRub(t.clientX,t.clientY);
+
+},{passive:false});
+
+lamp.addEventListener("mousemove",e=>{
+
+    if(e.buttons===1){
+        lampRub(e.clientX,e.clientY);
+    }
+
+});
+
+lamp.addEventListener("touchend",()=>{
+    lastX=null;
+    lastY=null;
+});
+
+lamp.addEventListener("mouseup",()=>{
+    lastX=null;
+    lastY=null;
+});
+
+
+/* =========================================================
+   GENIE DIALOGUE
+========================================================= */
+
+const genieLines=[
+    "Arey Bhabhi... aap yahan? 😳",
+    "Souvick ne waise toh mujhe bataya tha ki usne aapko kitna hurt kiya...",
+    "Lekin baat ye hai Bhabhi...",
+    "Maine usse kal hi poocha tha...",
+    "Agar main tumhe 3 wishes doon, toh bata kya chahiye?"
+];
+
+let genieLineIndex=0;
+
+function startGenieDialogue(){
+
+    genieLineIndex=0;
+
+    $("genieStartBtn").classList.add("hidden");
+
+    typeGenieLine();
+}
+
+function typeGenieLine(){
+
+    if(genieLineIndex>=genieLines.length){
+
+        $("genieStartBtn").classList.remove("hidden");
+        return;
+    }
+
+    const text=$("genieIntroText");
+
+    text.innerHTML="";
+
+    const chars=[...genieLines[genieLineIndex]];
+
+    let i=0;
+
+    const interval=setInterval(()=>{
+
+        text.innerHTML=chars.slice(0,i+1).join("");
+        i++;
+
+        if(i>=chars.length){
+
+            clearInterval(interval);
+
+            setTimeout(()=>{
+
+                genieLineIndex++;
+
+                typeGenieLine();
+
+            },900);
+        }
+
+    },25);
+}
+
+$("genieStartBtn").addEventListener("click",()=>{
+
+    showScene("wishScene");
+
+    startWish(1);
+
+});
+
+
+/* =========================================================
+   WISHES
+========================================================= */
+
+let currentWish=1;
+
+const wishTexts=[
+
+    "Maine pehli baar poocha...<br><br><span class='highlight'>“Bata, tujhe kya chahiye?”</span><br><br>Usne bas itna kaha...",
+
+    "Maine socha shayad is baar answer badlega...<br><br>Lekin phir se wahi jawab mila...",
+
+    "Teesri baar toh mujhe yakeen hi ho gaya...<br><br>Is ladke ki sabse badi wish kya hai."
+];
+
+function startWish(num){
+
+    currentWish=num;
+
+    $("wishCounter").textContent=
+        "WISH "+num+" OF 3";
+
+    $("wishNumber").textContent=
+        num===1 ? "The first wish..." :
+        num===2 ? "The second wish..." :
+        "The third wish...";
+
+    $("wishDialogue").innerHTML=
+        wishTexts[num-1];
+
+    $("wishBtn").classList.add("hidden");
+
+    document.querySelectorAll(".photo-cloud").forEach(c=>{
+        c.classList.remove("show");
+        c.classList.add("hidden");
+    });
+
+    const photo=$("photoCloud"+num);
+
+    photo.classList.remove("hidden");
+
+    setTimeout(()=>{
+        photo.classList.add("show");
+    },300);
+
+    setTimeout(()=>{
+
+        $("wishDialogue").innerHTML +=
+            "<br><br><span class='highlight'>“Mujhe apne Baba ke saath rehna hai... zindagi bhar.” ❤️</span>";
+
+        burstHearts(6);
+
+        setTimeout(()=>{
+
+            if(num<3){
+
+                $("wishBtn").textContent=
+                    "Next wish ❤️";
+
+                $("wishBtn").classList.remove("hidden");
+
+            }else{
+
+                $("wishBtn").textContent=
+                    "There's something else... 💓";
+
+                $("wishBtn").classList.remove("hidden");
+            }
+
+        },700);
+
+    },1100);
+}
+
+$("wishBtn").addEventListener("click",()=>{
+
+    if(currentWish<3){
+
+        startWish(currentWish+1);
+
+    }else{
+
+        burstHearts(12);
+        showScene("scene3");
+    }
+
+});
+
+
+/* =========================================================
+   SCENE 3 HEART
+========================================================= */
+
+let heartStep=0;
+
+const heartMessages=[
+
+    "I know I hurt you... and I'm genuinely sorry. ❤️",
+
+    "I'm not here to make excuses. I just want you to know that I understand where I went wrong.",
+
+    "You mean so much more to me than I sometimes know how to express."
+];
+
+$("heartUnlock").addEventListener("click",()=>{
+
+    if(heartStep>0) return;
+
+    heartStep=1;
+
+    $("heartUnlock").animate(
+        [
+            {transform:"scale(1)"},
+            {transform:"scale(1.18)"},
+            {transform:"scale(.95)"},
+            {transform:"scale(1.05)"}
+        ],
+        {duration:900}
+    );
+
+    burstHearts(20);
+
+    setTimeout(()=>{
+
+        $("heartMessage").classList.remove("hidden");
+
+        typeHeartMessage(0);
+
+        $("heartNext").classList.remove("hidden");
+
+    },600);
+
+});
+
+
+function typeHeartMessage(index){
+
+    const target=$("heartMessageText");
+
+    target.innerHTML="";
+
+    const chars=[...heartMessages[index]];
+
+    let i=0;
+
+    const interval=setInterval(()=>{
+
+        target.innerHTML=chars.slice(0,i+1).join("");
+
+        i++;
+
+        if(i>=chars.length){
+
+            clearInterval(interval);
+        }
+
+    },30);
+}
+
+
+$("heartNext").addEventListener("click",()=>{
+
+    heartStep++;
+
+    if(heartStep<=3){
+
+        typeHeartMessage(heartStep-1);
+
+        if(heartStep===3){
+
+            $("heartNext").textContent=
+                "Clear the sky 🌅";
+
+            $("heartNext").onclick=()=>{
+
+                showScene("rainScene");
+                createRain();
+            };
+        }
+
+    }
+
+});
+
+
+/* =========================================================
+   RAIN
+========================================================= */
+
+function createRain(){
+
+    const container=$("cloudContainer");
+
+    document.querySelectorAll(".rain-drop").forEach(x=>x.remove());
+
+    for(let i=0;i<28;i++){
+
+        const drop=document.createElement("div");
+
+        drop.className="rain-drop";
+
+        drop.style.left=Math.random()*100+"%";
+        drop.style.top=Math.random()*-100+"px";
+        drop.style.animationDelay=Math.random()*1+"s";
+        drop.style.animationDuration=(.7+Math.random()*.6)+"s";
+
+        container.appendChild(drop);
+    }
+}
+
+let cloudsRemoved=0;
+
+document.querySelectorAll(".cloud").forEach(cloud=>{
+
+    cloud.addEventListener("click",()=>{
+
+        if(cloud.classList.contains("removed")) return;
+
+        cloud.classList.add("removed");
+
+        cloudsRemoved++;
+
+        if(cloudsRemoved>=3){
+
+            document.querySelectorAll(".rain-drop").forEach(drop=>{
+                drop.style.opacity="0";
+                drop.style.transition="1s";
+            });
+
+            $("sun").classList.add("risen");
+
+            setTimeout(()=>{
+
+                $("sunriseText").classList.add("show");
+
+                burstHearts(14);
+
+                $("rainNext").classList.remove("hidden");
+
+            },1000);
+        }
+    });
+
+});
+
+
+$("rainNext").addEventListener("click",()=>{
+
+    showScene("scene4");
+
+});
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+let letterOpened=false;
+
+$("openLetterBtn").addEventListener("click",()=>{
+
+    if(letterOpened) return;
+
+    letterOpened=true;
+
+    $("envelope").classList.add("open");
+
+    burstHearts(16);
+
+    setTimeout(()=>{
+
+        $("letter").classList.add("show");
+
+        $("openLetterBtn").classList.add("hidden");
+
+        setTimeout(()=>{
+
+            $("scene4").scrollTo({
+                top:$("scene4").scrollHeight,
+                behavior:"smooth"
+            });
+
+        },700);
+
+    },800);
+
+});
+
+
+/* =========================================================
+   FINAL SCENE
+========================================================= */
+
+$("finalBtn").addEventListener("click",()=>{
+
+    burstHearts(25);
+
+    showScene("finalScene");
+
+});
+
+
+$("youBtn").addEventListener("click",()=>{
+
+    burstHearts(35);
+
+    showScene("answerScene");
+
+});
+
+
+/* =========================================================
+   FINAL BUTTONS
+========================================================= */
+
+$("angryBtn").addEventListener("click",()=>{
+
+    $("finalResponse").innerHTML=
+        "Fair enough, Bba. 😭❤️<br><br>"+
+        "Take your time. I'll wait.";
+
+    $("angryBtn").classList.add("hidden");
+
+    $("maybeBtn").classList.remove("hidden");
+
+});
+
+
+$("maybeBtn").addEventListener("click",()=>{
+
+    $("finalResponse").innerHTML=
+        "Bas Bhabhi... itna hi toh chahiye tha. 🥺❤️";
+
+    burstHearts(40);
+
+    $("maybeBtn").classList.add("hidden");
+
+});
+
+
+/* =========================================================
+   MUSIC
+   Put your own music file as music.mp3 in same folder.
+========================================================= */
+
+const music=new Audio("music.mp3");
+music.loop=true;
+music.volume=.32;
+
+let musicPlaying=false;
+
+$("musicToggle").addEventListener("click",()=>{
+
+    if(!musicPlaying){
+
+        music.play().then(()=>{
+
+            musicPlaying=true;
+            $("musicToggle").textContent="🔊";
+
+        }).catch(()=>{
+
+            alert("Please tap the music button again to start the music.");
+
+        });
+
+    }else{
+
+        music.pause();
+
+        musicPlaying=false;
+
+        $("musicToggle").textContent="♫";
+    }
+
+});
+
+
+/* =========================================================
+   FIRST USER INTERACTION — MUSIC READY
+========================================================= */
+
+document.addEventListener("pointerdown",()=>{
+
+    /*
+      Browser autoplay restrictions mean music is intentionally
+      started only after the user interacts.
+    */
+
+},{once:true});
+
+</script>
+
+</body>
+</html>
